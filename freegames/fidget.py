@@ -9,6 +9,8 @@ Exercises
 
 """
 
+#fuck 
+
 from turtle import *
 
 state = {'turn': 0}
