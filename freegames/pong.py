@@ -14,14 +14,16 @@ Exercises
 
 from random import choice, random
 from turtle import *
+import time
 from freegames import vector
+
 
 def value():
     "Randomly generate value between (-5, -3) or (3, 5)."
     return (3 + random() * 2) * choice([1, -1])
 
 ball = vector(0, 0)
-aim = vector(value(), value())
+aim = vector(7, 7)
 state = {1: 0, 2: 0}
 
 def move(player, change):
@@ -43,10 +45,23 @@ def rectangle(x, y, width, height):
 
 def draw():
     "Draw game and move pong ball."
-    clear()
-    rectangle(-200, state[1], 10, 50)
-    rectangle(190, state[2], 10, 50)
+    player1 = 0
+    player2 = 0
 
+    color('white')
+    clear()
+
+    fillcolor("blue")
+    begin_fill()
+    rectangle(-200, state[1], 10, 50)
+    end_fill()
+
+    fillcolor("red")
+    begin_fill()
+    rectangle(190, state[2], 10, 50)
+    end_fill()
+
+    color('cyan')
     ball.move(aim)
     x = ball.x
     y = ball.y
@@ -66,7 +81,11 @@ def draw():
         if low <= y <= high:
             aim.x = -aim.x
         else:
-            return
+            player1 = player1+1
+            print(player1)
+            ball.x = 0
+            ball.y = 0
+            time.sleep(1)
 
     if x > 185:
         low = state[2]
@@ -75,17 +94,59 @@ def draw():
         if low <= y <= high:
             aim.x = -aim.x
         else:
-            return
+            player2 = player2+1
+            print(player2)
+            ball.x = 0
+            ball.y = 0
+            time.sleep(1)
+
+        
 
     ontimer(draw, 50)
 
-setup(420, 420, 370, 0)
-hideturtle()
-tracer(False)
-listen()
-onkey(lambda: move(1, 20), 'w')
-onkey(lambda: move(1, -20), 's')
-onkey(lambda: move(2, 20), 'i')
-onkey(lambda: move(2, -20), 'k')
-draw()
-done()
+def openpage():
+    setup(420, 420, 370, 0)
+    bgcolor('grey')
+    goto(0,0)
+    pendown()
+    color('black')
+    style = ('courier', 35, 'italic')
+    style2 = ('courier', 15, 'italic')
+    write('WELCOME TO PONG!', font= style, align= 'center')
+    penup()
+
+    goto(0,-25)
+    pendown()
+    write('Move the paddles and beat your opponets', font= style2, align= 'center')
+    penup()
+
+    color('blue')
+    goto(-90,-70)
+    pendown()
+    write('player 2 controls \nW and S keys', font= style2, align= 'center')
+    penup()
+
+    color('red')
+    goto(90,-70)
+    pendown()
+    write('player 2 controls \nUp and down keys', font= style2, align= 'center')
+    hideturtle()
+    time.sleep(4)  
+
+def run():
+    setup(420, 420, 370, 0)
+    bgcolor('grey')
+    hideturtle()
+    tracer(False)
+    listen()
+    onkey(lambda: move(1, 25), 'w')
+    onkey(lambda: move(1, -25), 's')
+    onkey(lambda: move(2, 25), 'Up')
+    onkey(lambda: move(2, -25), 'Down')
+    draw()
+    done()
+
+def main():
+    openpage()
+    run()
+main()
