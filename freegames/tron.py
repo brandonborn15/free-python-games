@@ -34,12 +34,26 @@ def draw():
     p2head = p2xy.copy()
 
     if not inside(p1head) or p1head in p2body:
-        print('Player blue wins!')
-        return
+        blue = blue+1
+        print('Tron wins!')
+        time.sleep(1.5)
+        clear()
+        color('blue')
+        style = ('courier', 35, 'italic')
+        write("Clu was Derezzed", font = style, align = "center" )
+        
 
     if not inside(p2head) or p2head in p1body:
-        print('Player red wins!')
-        return
+        red = red+1
+        print('Clu wins!')
+        time.sleep(1.5)
+        clear()
+        goto(0,0)
+        color('red')
+        style = ('courier', 35, 'italic')
+        write("Tron was Derezzed", font = style, align = "center" )
+
+        
 
     p1body.add(p1head)
     p2body.add(p2head)
@@ -51,7 +65,7 @@ def draw():
 
 def tronLogo():
     hideturtle()
-    width(2)
+    width(3)
     goto(-210,0)
     pendown()
     color('cyan')
@@ -156,8 +170,6 @@ def tronLogo():
     left(90)
     forward(45)
     penup()
-    
-    time.sleep(10)
 
 def openpage():
     setup(620, 620, 570, 0)
@@ -166,16 +178,14 @@ def openpage():
     pendown()
     color('cyan')
     style = ('courier', 35, 'italic')
-    '''style2 = ('courier', 15, 'italic')'''
+    style2 = ('courier', 15, 'italic')
     write('WELCOME TO', font= style, align= 'center')
     penup()
     tronLogo()
 
-
-
-def main():
-    openpage()
-    '''setup(620, 620, 570, 0)
+def run():
+    clear()
+    setup(620, 620, 570, 0)
     bgcolor('black')
     hideturtle()
     tracer(False)
@@ -186,5 +196,15 @@ def main():
     onkey(lambda: p2aim.rotate(90), 'a')
     onkey(lambda: p2aim.rotate(-90), 'd')
     draw()
-    done()'''
+    done()
+
+def main():
+    openpage()
+    goto(0,-150)
+    color('cyan')
+    style = ('courier', 15, 'italic')
+    write("Start", font = style, align = "center" )
+    time.sleep(1)
+    run()
+    
 main()
