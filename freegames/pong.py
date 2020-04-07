@@ -17,6 +17,8 @@ from turtle import *
 import time
 from freegames import vector
 
+player1 = 0
+player2 = 0
 
 def value():
     "Randomly generate value between (-5, -3) or (3, 5)."
@@ -44,9 +46,9 @@ def rectangle(x, y, width, height):
     end_fill()
 
 def draw():
+    global player1
+    global player2
     "Draw game and move pong ball."
-    player1 = 0
-    player2 = 0
 
     color('white')
     clear()
