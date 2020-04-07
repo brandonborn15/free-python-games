@@ -9,7 +9,7 @@ Exercises
    Hint: colormode(255); color(0, 100, 200)
 
 """
-
+image = "DVD.png"
 from random import *
 from turtle import *
 from freegames import vector
@@ -36,7 +36,7 @@ def draw():
 
     clear()
     goto(x, y)
-    dot(10)
+    dot(30)
 
     ontimer(draw, 50)
 
