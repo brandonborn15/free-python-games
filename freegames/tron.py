@@ -21,26 +21,55 @@ p2xy = vector(100, 0)
 p2aim = vector(-4, 0)
 p2body = set()
 
+blue = 0
+red = 0
+
+def reset():
+    global p1xy
+    global p2xy
+    global p1aim
+    global p2aim
+    global p1body
+    global p2body
+    p1xy = vector(-100, 0)
+    p1aim = vector(4, 0)
+    p1body = set()
+
+    p2xy = vector(100, 0)
+    p2aim = vector(-4, 0)
+    p2body = set()
+
+
 def inside(head):
     "Return True if head inside screen."
     return -300 < head.x < 300 and -300 < head.y < 300
 
 def draw():
+    global red
+    global blue
     "Advance players and draw game."
     p1xy.move(p1aim)
     p1head = p1xy.copy()
 
     p2xy.move(p2aim)
     p2head = p2xy.copy()
+    if(red == 3 or blue == 3):
+        print("Game Over")
+        SystemExit()
 
     if not inside(p1head) or p1head in p2body:
         blue = blue+1
         print('Tron wins!')
         time.sleep(1.5)
         clear()
+        goto(0, 0)
         color('blue')
         style = ('courier', 35, 'italic')
-        write("Clu was Derezzed", font = style, align = "center" )
+        write("Clu was Derezzed", font=style, align="center" )
+        time.sleep(1.5)
+        clear()
+        reset()
+        '''run()'''
         
 
     if not inside(p2head) or p2head in p1body:
@@ -51,7 +80,11 @@ def draw():
         goto(0,0)
         color('red')
         style = ('courier', 35, 'italic')
-        write("Tron was Derezzed", font = style, align = "center" )
+        write("Tron was Derezzed", font=style, align="center" )
+        time.sleep(1.5)
+        clear()
+        reset()
+        '''run()'''
 
         
 
