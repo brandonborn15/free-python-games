@@ -10,6 +10,7 @@ Exercises
 
 from random import randrange, seed
 from turtle import *
+import time
 from freegames import floor, square
 
 seed(0)
@@ -85,11 +86,25 @@ def tap(x, y):
                     if not shown[pair]:
                         pairs.append(pair)
 
+def openpage():
+    setup(420, 420, 370, 0)
+    goto(0,0)
+    pendown()
+    color('black')
+    style = ('courier', 35, 'italic')
+    style2 = ('courier', 15, 'italic')
+    write('WELCOME TO \nMINESWEEPER!', font= style, align= 'center')
+    penup()
+    hideturtle()
+    time.sleep(4)
 
-setup(420, 420, 370, 0)
-hideturtle()
-tracer(False)
-initialize()
-draw()
-onscreenclick(tap)
-done()
+def main():
+    openpage()
+    setup(420, 420, 370, 0)
+    hideturtle()
+    tracer(False)
+    initialize()
+    draw()
+    onscreenclick(tap)
+    done()
+main()

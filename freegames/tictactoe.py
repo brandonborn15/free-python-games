@@ -10,6 +10,7 @@ Exercises
 """
 
 from turtle import *
+import time
 from freegames import line
 
 def grid():
@@ -50,10 +51,26 @@ def tap(x, y):
     update()
     state['player'] = not player
 
-setup(420, 420, 370, 0)
-hideturtle()
-tracer(False)
-grid()
-update()
-onscreenclick(tap)
-done()
+def openPage():
+    setup(420, 420, 370, 0)
+    goto(0,0)
+    pendown()
+    color('black')
+    style = ('courier', 35, 'italic')
+    style2 = ('courier', 15, 'italic')
+    write('WELCOME TO \nTIC TAC TOE!', font= style, align= 'center')
+    penup()
+    hideturtle()
+    time.sleep(4)
+
+def main(): 
+    openPage()
+    clear()
+    setup(420, 420, 370, 0)
+    hideturtle()
+    tracer(False)
+    grid()
+    update()
+    onscreenclick(tap)
+    done()
+main()

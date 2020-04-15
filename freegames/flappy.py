@@ -11,6 +11,7 @@ Exercises
 
 from random import *
 from turtle import *
+import time
 from freegames import vector
 
 bird = vector(0, 0)
@@ -69,10 +70,24 @@ def move():
     draw(True)
     ontimer(move, 50)
 
-setup(420, 420, 370, 0)
-hideturtle()
-up()
-tracer(False)
-onscreenclick(tap)
-move()
-done()
+def openpage():
+    setup(420, 420, 370, 0)
+    goto(0,0)
+    pendown()
+    color('green')
+    style = ('courier', 35, 'italic')
+    style2 = ('courier', 15, 'italic')
+    write('WELCOME TO FLAPPY!', font= style, align= 'center')
+    penup()
+    hideturtle()
+    time.sleep(4)
+
+def main():
+    openpage()
+    setup(420, 420, 370, 0)
+    hideturtle()
+    up()
+    tracer(False)
+    onscreenclick(tap)
+    move()
+    done()

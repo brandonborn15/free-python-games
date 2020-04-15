@@ -12,6 +12,7 @@ Exercises:
 
 from random import *
 from turtle import *
+import time
 from freegames import path
 
 car = path('car.gif')
@@ -75,11 +76,25 @@ def draw():
     update()
     ontimer(draw, 100)
 
-shuffle(tiles)
-setup(420, 420, 370, 0)
-addshape(car)
-hideturtle()
-tracer(False)
-onscreenclick(tap)
-draw()
-done()
+def openpage():
+    setup(420, 420, 370, 0)
+    goto(0,0)
+    pendown()
+    color('black')
+    style = ('courier', 35, 'italic')
+    style2 = ('courier', 15, 'italic')
+    write('  WELCOME TO \nThe Memory Game!', font= style, align= 'center')
+    penup()
+    hideturtle()
+    time.sleep(4)
+
+def main():
+    shuffle(tiles)
+    setup(420, 420, 370, 0)
+    addshape(car)
+    hideturtle()
+    tracer(False)
+    onscreenclick(tap) 
+    draw()
+    done()
+main()

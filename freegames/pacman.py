@@ -12,6 +12,7 @@ Exercises
 
 from random import choice
 from turtle import *
+import time
 from freegames import floor, vector
 
 state = {'score': 0}
@@ -155,17 +156,34 @@ def change(x, y):
         aim.x = x
         aim.y = y
 
-setup(420, 420, 370, 0)
-hideturtle()
-tracer(False)
-writer.goto(160, 160)
-writer.color('white')
-writer.write(state['score'])
-listen()
-onkey(lambda: change(5, 0), 'Right')
-onkey(lambda: change(-5, 0), 'Left')
-onkey(lambda: change(0, 5), 'Up')
-onkey(lambda: change(0, -5), 'Down')
-world()
-move()
-done()
+def openpage():
+    setup(420, 420, 370, 0)
+    bgcolor('black')
+    goto(0,-30)
+    pendown()
+    color('yellow')
+    style = ('courier', 35, 'italic')
+    style2 = ('courier', 15, 'italic')
+    write('WELCOME TO \n\n PAC MAN', font= style, align= 'center')
+    penup()
+    hideturtle()
+    time.sleep(4)
+
+def main():
+    openpage()
+    setup(420, 420, 370, 0)
+    hideturtle()
+    tracer(False)
+    writer.goto(160, 160)
+    writer.color('white')
+    writer.write(state['score'])
+    listen()
+    onkey(lambda: change(5, 0), 'Right')
+    onkey(lambda: change(-5, 0), 'Left')
+    onkey(lambda: change(0, 5), 'Up')
+    onkey(lambda: change(0, -5), 'Down')
+    world()
+    move()
+    done()
+
+main()

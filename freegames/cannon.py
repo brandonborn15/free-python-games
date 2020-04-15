@@ -72,10 +72,11 @@ def move():
 
     ontimer(move, 50)
 
-setup(420, 420, 370, 0)
-hideturtle()
-up()
-tracer(False)
-onscreenclick(tap)
-move()
-done()
+def main():
+    setup(420, 420, 370, 0)
+    hideturtle()
+    up()
+    tracer(False)
+    onscreenclick(tap)
+    move()
+    done()
