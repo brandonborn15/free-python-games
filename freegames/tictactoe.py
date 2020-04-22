@@ -189,7 +189,7 @@ def main():
 
 def clearBoard():
     global boxes
-for box in boxes:
-    box = ''
+    for box in boxes:
+        box = ''
 
 main()
