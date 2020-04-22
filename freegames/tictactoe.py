@@ -14,15 +14,7 @@ import time
 from freegames import line
 
 #board
-box1 = ''
-box2 = ''
-box3 = ''
-box4 = ''
-box5 = ''
-box6 = ''
-box7 = ''
-box8 = ''
-box9 = ''
+boxes = ['', '', '', '', '', '', '', '', '']
 
 def grid():
     "Draw tic-tac-toe grid."
@@ -36,6 +28,7 @@ def drawx(x, y):
     pensize(10)
     line(x, y, x + 133, y + 133)
     line(x, y + 133, x + 133, y)
+    checkwin()
 
 def drawo(x, y):
     "Draw O player."
@@ -44,11 +37,12 @@ def drawo(x, y):
     goto(x + 67, y + 5)
     down()
     circle(62)
+    checkwin()
 
 def checkwin():
     'checks to see if someone won'
-    global box1, box2, box3, box4, box5, box6, box7, box8, box9
-    wins = [[box1, box2, box3], [box4, box5, box6], [box7, box8, box9], [box1, box4, box7], [box2, box5, box8], [box3, box6, box9], [box1, box5, box9], [box3, box5, box7]]
+    global boxes
+    wins = [[boxes[0], boxes[1], boxes[2]], [boxes[3], boxes[4], boxes[5]], [boxes[6], boxes[7], boxes[8]], [boxes[0], boxes[3], boxes[6]], [boxes[1], boxes[4], boxes[7]], [boxes[2], boxes[5], boxes[8]], [boxes[0], boxes[4], boxes[8]], [boxes[2], boxes[4], boxes[6]]]
     for scenario in wins:
         if scenario[0] == scenario[1] == scenario[2] and scenario[0] != '':
             print("CONGRATULATIONS, " + scenario[0] + ' wins!')
@@ -57,13 +51,12 @@ def checkwin():
 
 def floor(value):
     "Round value down to grid with square size 133."
-    print(((value + 200) // 133) * 133 - 200)
     return ((value + 200) // 133) * 133 - 200
 
 def aiturn():
     "AI's turn"
-    global box1, box2, box3, box4, box5, box6, box7, box8, box9
-    wins = [[box1, box2, box3], [box4, box5, box6], [box7, box8, box9], [box1, box4, box7], [box2, box5, box8], [box3, box6, box9], [box1, box5, box9], [box3, box5, box7]]
+    global boxes
+    wins = [[boxes[0], boxes[1], boxes[2]], [boxes[3], boxes[4], boxes[5]], [boxes[6], boxes[7], boxes[8]], [boxes[0], boxes[3], boxes[6]], [boxes[1], boxes[4], boxes[7]], [boxes[2], boxes[5], boxes[8]], [boxes[0], boxes[4], boxes[8]], [boxes[2], boxes[4], boxes[6]]]
     prospects = []
     for scenario in wins:
         xcount = 0
@@ -84,12 +77,10 @@ def aiturn():
         if prospect[2] == 2 and prospect[1] == 1:
             temp = prospect
             win = True
-            print("win")
             break
         elif prospect[0] == 2 and prospect[1] == 1:
             temp = prospect
             block = True
-            print("block")
             break
     if win == True or block == True:
         print("Block")
@@ -98,7 +89,6 @@ def aiturn():
     else:
         print("idk")
         tempi = 9
-        boxes = [box1, box2, box3, box4, box5, box6, box7, box8, box9]
         valid = False
         while valid == False:
             index = random.randrange(0, 8)
@@ -108,20 +98,15 @@ def aiturn():
         makeMove(tempi)
 
 def boxFinder(prospect):
-    global box1, box2, box3, box4, box5, box6, box7, box8, box9
-    wins = [[box1, box2, box3], [box4, box5, box6], [box7, box8, box9], [box1, box4, box7], [box2, box5, box8], [box3, box6, box9], [box1, box5, box9], [box3, box5, box7]]
-    scenario = wins[prospect[3]]
-    print(scenario)
-    boxes = [box1, box2, box3, box4, box5, box6, box7, box8, box9]
-    for box in scenario:
-        if box == '':
-            box = 'tbd'
-            box9 += 'tbd'
-    print(boxes)
-    for box in boxes:
-        if box == 'tbd':
-            theChosenOne = boxes.index(box)
-            box = 'o'
+    global boxes
+    wins = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]]
+    for index in wins[prospect[3]]:
+        if boxes[index] == '':
+            boxes[index] = 'tbd'
+    for num in range(0, 8):
+        if boxes[num] == 'tbd':
+            theChosenOne = num
+            boxes[num] = 'o'
             makeMove(theChosenOne)
 
 def makeMove(index):
@@ -146,36 +131,34 @@ def makeMove(index):
         drawo(66.0, -200.0)
     else:
         print("ERROR")
-    checkwin()
     update()
 
 def tap(x, y):
     'Draw X or O in tapped square.'
-    global box1, box2, box3, box4, box5, box6, box7, box8, box9
-    if x < -67 and y > 67 and box1 == '':
-        box1 = 'x'
-    elif -67 <= x <= 67 and y > 67 and box2 == '':
-        box2 = 'x'
-    elif x > 67 and y > 67 and box3 == '':
-        box3 = 'x'
-    elif x < -67 and -67 <= y <= 67 and box4 == '':
-        box4 = 'x'
-    elif -67 <= x <= 67 and -67 <= y <= 67 and box5 == '':
-        box5 = 'x'
-    elif x > 67 and -67 <= y <= 67 and box6 == '':
-        box6 = 'x'
-    elif x < -67 and y < -67 and box7 == '':
-        box7 = 'x'
-    elif -67 <= x <= 67 and y < -67 and box8 == '':
-        box8 = 'x'
-    elif x > 67 and y < -67 and box9 == '':
-        box9 = 'x'
+    global boxes
+    if x < -67 and y > 67 and boxes[0] == '':
+        boxes[0] = 'x'
+    elif -67 <= x <= 67 and y > 67 and boxes[1] == '':
+        boxes[1] = 'x'
+    elif x > 67 and y > 67 and boxes[2] == '':
+        boxes[2] = 'x'
+    elif x < -67 and -67 <= y <= 67 and boxes[3] == '':
+        boxes[3] = 'x'
+    elif -67 <= x <= 67 and -67 <= y <= 67 and boxes[4] == '':
+        boxes[4] = 'x'
+    elif x > 67 and -67 <= y <= 67 and boxes[5] == '':
+        boxes[5] = 'x'
+    elif x < -67 and y < -67 and boxes[6] == '':
+        boxes[6] = 'x'
+    elif -67 <= x <= 67 and y < -67 and boxes[7] == '':
+        boxes[7] = 'x'
+    elif x > 67 and y < -67 and boxes[8] == '':
+        boxes[8] = 'x'
     else:
         print('invalid box')
     x = floor(x)
     y = floor(y)
     drawx(x, y)
-    checkwin()
     aiturn()
     update()
 
@@ -205,15 +188,8 @@ def main():
     done()
 
 def clearBoard():
-    global box1, box2, box3, box4, box5, box6, box7, box8, box9
-    box1 = ''
-    box2 = ''
-    box3 = ''
-    box4 = ''
-    box5 = ''
-    box6 = ''
-    box7 = ''
-    box8 = ''
-    box9 = ''
+    global boxes
+for box in boxes:
+    box = ''
 
 main()
