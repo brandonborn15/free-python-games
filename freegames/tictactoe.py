@@ -13,6 +13,17 @@ from turtle import *
 import time
 from freegames import line
 
+#board
+box1 = ''
+box2 = ''
+box3 = ''
+box4 = ''
+box5 = ''
+box6 = ''
+box7 = ''
+box8 = ''
+box9 = ''
+
 def grid():
     "Draw tic-tac-toe grid."
     line(-67, 200, -67, -200)
@@ -42,7 +53,27 @@ state = {'player': 0}
 players = [drawx, drawo]
 
 def tap(x, y):
+    global box1, box2, box3, box4, box5, box6, box7, box8, box9
     "Draw X or O in tapped square."
+    if x < -67 and y > 67:
+        box1 = 'x'
+    elif -67 <= x <= 67 and y > 67:
+        box2 = 'x'
+    elif x > 67 and y > 67:
+        box3 = 'x'
+    elif x < -67 and -67 <= y <= 67:
+        box4 = 'x'
+    elif -67 <= x <= 67 and -67 <= y <= 67:
+        box5 = 'x'
+    elif x > 67 and -67 <= y <= 67:
+        box6 = 'x'
+    elif x < -67 and y < -67:
+        box7 = 'x'
+    elif -67 <= x <= 67 and y < -67:
+        box8 = 'x'
+    else:
+        box9 = 'x'
+    print(box1)
     x = floor(x)
     y = floor(y)
     player = state['player']
