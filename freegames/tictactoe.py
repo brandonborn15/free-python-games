@@ -23,7 +23,6 @@ box6 = ''
 box7 = ''
 box8 = ''
 box9 = ''
-rando = 32
 
 def grid():
     "Draw tic-tac-toe grid."
@@ -34,8 +33,6 @@ def grid():
 
 def drawx(x, y):
     "Draw X player."
-    print(x)
-    print(y)
     pensize(10)
     line(x, y, x + 133, y + 133)
     line(x, y + 133, x + 133, y)
@@ -65,7 +62,7 @@ def floor(value):
 
 def aiturn():
     "AI's turn"
-    global box1, box2, box3, box4, box5, box6, box7, box8, box9, rando
+    global box1, box2, box3, box4, box5, box6, box7, box8, box9
     wins = [[box1, box2, box3], [box4, box5, box6], [box7, box8, box9], [box1, box4, box7], [box2, box5, box8], [box3, box6, box9], [box1, box5, box9], [box3, box5, box7]]
     prospects = []
     for scenario in wins:
@@ -79,63 +76,73 @@ def aiturn():
                 spacecount += 1
             elif box == 'o':
                 ocount += 1
-        prospects.append([scenario, xcount, spacecount, ocount])
+        prospects.append([xcount, spacecount, ocount, wins.index(scenario)])
+    temp = []
+    win = False
+    block = False
     for prospect in prospects:
-        if prospect[3] == 2 and prospect[2] == 1:
-            for box in prospect[0]:
-                if box == '':
-                    box = 'tbd'
-                    print("CHECKMATE")
-                    makeChoice()
-    for prospect in prospects:
-        if prospect[1] == 2 and prospect[2] == 1:
-            for box in prospect[0]:
-                if box == '':
-                    box = 'tbd'
-                    print("BLOCKED")
-                    makeChoice()
-    boxes = [box1, box2, box3, box4, box5, box6, box7, box8, box9]
-    valid = False
-    while valid == False:
-        tempnum = random.randrange(0, 8)
-        if boxes[tempnum] == '':
-            print(box1 + '\n' + box2 + '\n' + box3 + '\n' + box4 + '\n' + box5 + '\n' + box6 + '\n' + box7 + '\n' + box8 + '\n' + box9)
-            boxes[tempnum] = 'tbd'
-            print(box1 + '\n' + box2 + '\n' + box3 + '\n' + box4 + '\n' + box5 + '\n' + box6 + '\n' + box7 + '\n' + box8 + '\n' + box9)
-            rando = tempnum
-            print(tempnum)
-            valid = True
-            print("idk")
-            makeChoice()
+        if prospect[2] == 2 and prospect[1] == 1:
+            temp = prospect
+            win = True
+            print("win")
+            break
+        elif prospect[0] == 2 and prospect[1] == 1:
+            temp = prospect
+            block = True
+            print("block")
+            break
+    if win == True or block == True:
+        print("Block")
+        print(temp)
+        boxFinder(temp)
+    else:
+        print("idk")
+        tempi = 9
+        boxes = [box1, box2, box3, box4, box5, box6, box7, box8, box9]
+        valid = False
+        while valid == False:
+            index = random.randrange(0, 8)
+            if boxes[index] == '':
+                tempi = index
+                valid = True
+        makeMove(tempi)
 
-def makeChoice():
-    global box1, box2, box3, box4, box5, box6, box7, box8, box9, rando
+def boxFinder(prospect):
+    global box1, box2, box3, box4, box5, box6, box7, box8, box9
+    wins = [[box1, box2, box3], [box4, box5, box6], [box7, box8, box9], [box1, box4, box7], [box2, box5, box8], [box3, box6, box9], [box1, box5, box9], [box3, box5, box7]]
+    scenario = wins[prospect[3]]
+    print(scenario)
     boxes = [box1, box2, box3, box4, box5, box6, box7, box8, box9]
-    theChosenOne = 32
+    for box in scenario:
+        if box == '':
+            box = 'tbd'
+            box9 += 'tbd'
+    print(boxes)
     for box in boxes:
         if box == 'tbd':
             theChosenOne = boxes.index(box)
             box = 'o'
-    if theChosenOne == 32:
-        theChosenOne = rando
-    if theChosenOne == 0:
+            makeMove(theChosenOne)
+
+def makeMove(index):
+    if index == 0:
         drawo(-200.0, 66.0)
         print("1")
-    elif theChosenOne == 1:
+    elif index == 1:
         drawo(-67.0, 66.0)
-    elif theChosenOne == 2:
+    elif index == 2:
         drawo(66.0, 66.0)
-    elif theChosenOne == 3:
+    elif index == 3:
         drawo(-200.0, -67.0)
-    elif theChosenOne == 4:
+    elif index == 4:
         drawo(-67.0, -67.0)
-    elif theChosenOne == 5:
+    elif index == 5:
         drawo(66.0, -67.0)
-    elif theChosenOne == 6:
+    elif index == 6:
         drawo(-200.0, -200.0)
-    elif theChosenOne == 7:
+    elif index == 7:
         drawo(-67.0, -200.0)
-    elif theChosenOne == 8:
+    elif index == 8:
         drawo(66.0, -200.0)
     else:
         print("ERROR")
