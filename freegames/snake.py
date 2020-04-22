@@ -183,6 +183,7 @@ def restarting():
     global food
     global snake
     global lives
+    clear()
     snake = [1]
     food = vector(0, 0)
     snake = [vector(10, 0)]
