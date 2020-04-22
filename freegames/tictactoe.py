@@ -47,7 +47,7 @@ def checkwin():
         if scenario[0] == scenario[1] == scenario[2] and scenario[0] != '':
             print("CONGRATULATIONS, " + scenario[0] + ' wins!')
             clearBoard()
-            main()
+            run()
 
 def floor(value):
     "Round value down to grid with square size 133."
@@ -178,6 +178,9 @@ def openPage():
 def main():
     'main function'
     openPage()
+    run()
+
+def run():
     clear()
     setup(420, 420, 370, 0)
     hideturtle()
@@ -189,7 +192,7 @@ def main():
 
 def clearBoard():
     global boxes
-for box in boxes:
-    box = ''
+    for box in boxes:
+        box = ''
 
 main()
