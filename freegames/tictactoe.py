@@ -192,7 +192,7 @@ def run():
 
 def clearBoard():
     global boxes
-    for box in boxes:
-        box = ''
+    for index in range(0, 9):
+        boxes[index] = ''
 
 main()
