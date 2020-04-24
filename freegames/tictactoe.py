@@ -31,6 +31,7 @@ def drawx(x, y):
     checkwin()
 
 def drawo(x, y):
+    global boxes
     "Draw O player."
     up()
     pensize(10)
@@ -48,6 +49,10 @@ def checkwin():
             print("CONGRATULATIONS, " + scenario[0] + ' wins!')
             clearBoard()
             run()
+    if '' not in boxes:
+        print("Cat's Game")
+        clearBoard()
+        run()
 
 def floor(value):
     "Round value down to grid with square size 133."
@@ -83,11 +88,8 @@ def aiturn():
             block = True
             break
     if win == True or block == True:
-        print("Block")
-        print(temp)
         boxFinder(temp)
     else:
-        print("idk")
         tempi = 9
         valid = False
         while valid == False:
@@ -95,6 +97,7 @@ def aiturn():
             if boxes[index] == '':
                 tempi = index
                 valid = True
+                boxes[index] = 'o'
         makeMove(tempi)
 
 def boxFinder(prospect):
@@ -103,6 +106,7 @@ def boxFinder(prospect):
     for index in wins[prospect[3]]:
         if boxes[index] == '':
             boxes[index] = 'tbd'
+    print(boxes)
     for num in range(0, 8):
         if boxes[num] == 'tbd':
             theChosenOne = num
@@ -112,7 +116,6 @@ def boxFinder(prospect):
 def makeMove(index):
     if index == 0:
         drawo(-200.0, 66.0)
-        print("1")
     elif index == 1:
         drawo(-67.0, 66.0)
     elif index == 2:
