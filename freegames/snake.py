@@ -15,6 +15,10 @@ Version UPDATE
 4. Game will force close after loosing
 5. Largely prints 'YOU HAVE LOST'
 6. When eaten itself entire snake turns red
+7. Has a life count of 3
+8. Keeps track of high score with external text file
+9. Added a main method
+10. Given a specific number of retrys based on numbers of lives
 
 
 """
